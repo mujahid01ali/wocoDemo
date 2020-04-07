@@ -52,7 +52,6 @@ class SearchVC: BaseVC, UITableViewDataSource, UISearchBarDelegate,SearchLocatio
         checkinView.roundCorners(.allCorners, radius: 8.0)
         searchView.roundCorners(.allCorners, radius: 8.0)
         locationView.roundCorners([.bottomRight,.topRight], radius: 16.0)
-        //data = recentVisit.data
         isAuthorizedtoGetUserLocation()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -143,6 +142,7 @@ class SearchVC: BaseVC, UITableViewDataSource, UISearchBarDelegate,SearchLocatio
         recentVisit = response as! RecentVisitResponse
         if recentVisit.status == 200 {
             filteredData = recentVisit.data
+            data = filteredData
         }else{
             if recentVisit.message != nil && !recentVisit.message.isEmpty{
                 showToast(message: recentVisit.message)
